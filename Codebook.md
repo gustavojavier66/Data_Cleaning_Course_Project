@@ -114,8 +114,9 @@ FrequencyBodyGyroscopeJerkMagnitudeMeanFrequency
 
 ### Steps peformed on data (Not necessarily in this order).
 
-1. Merges the training and the test sets to create one data set.
-2. Extracts only the measurements on the mean and standard deviation for each measurement.
-3. Uses descriptive activity names to name the activities in the data set
-4. Appropriately labels the data set with descriptive activity names.
-5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+1. Data Set is unzip and loaded into local variables
+2. Training and Test Data sets are merged.
+3. Only measurements on the mean and standard deviation for each measurement are extracted.
+4. Descriptive activity names are used to name the activities in the data set
+4. Activity names are appropriately labeled within the data set.
+5. An independent tidy data set with the average of each variable for each activity and each subject is created.
