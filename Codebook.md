@@ -31,7 +31,88 @@ subject_test.txt: 		A vector of 2947 integers, denoting the ID of the volunteer 
 y_test.txt: 			A vector of 2947 integers, denoting the ID of the activity related to each of the observations in X_test.txt.
 
 
-### Steps peformed on data (Not necessarily in this order.
+###Variables
+TimeBodyAccelerationMean-X
+TimeBodyAccelerationMean-Y             
+TimeBodyAccelerationMean-Z              
+TimeBodyAccelerationSTD-X              
+TimeBodyAccelerationSTD-Y             
+TimeBodyAccelerationSTD-Z              
+TimeGravityAccelerationMean-X             
+TimeGravityAccelerationMean-Y              
+TimeGravityAccelerationMean-Z              
+TimeGravityAccelerationSTD-X              
+TimeGravityAccelerationSTD-Y              
+TimeGravityAccelerationSTD-Z              
+TimeBodyAccelerationJerkMean-X              
+TimeBodyAccelerationJerkMean-Y              
+TimeBodyAccelerationJerkMean-Z             
+TimeBodyAccelerationJerkSTD-X              
+TimeBodyAccelerationJerkSTD-Y             
+TimeBodyAccelerationJerkSTD-Z              
+TimeBodyGyroscopeMean-X              
+TimeBodyGyroscopeMean-Y             
+TimeBodyGyroscopeMean-Z              
+TimeBodyGyroscopeSTD-X              
+TimeBodyGyroscopeSTD-Y              
+TimeBodyGyroscopeSTD-Z              
+TimeBodyGyroscopeJerkMean-X              
+TimeBodyGyroscopeJerkMean-Y             
+TimeBodyGyroscopeJerkMean-Z             
+TimeBodyGyroscopeJerkSTD-X             
+TimeBodyGyroscopeJerkSTD-Y              
+TimeBodyGyroscopeJerkSTD-Z              
+TimeBodyAccelerationMagnitudeMean              
+TimeBodyAccelerationMagnitudeSTD              
+TimeGravityAccelerationMagnitudeMean              
+TimeGravityAccelerationMagnitudeSTD             
+TimeBodyAccelerationJerkMagnitudeMean              
+TimeBodyAccelerationJerkMagnitudeSTD              
+TimeBodyGyroscopeMagnitudeMean              
+TimeBodyGyroscopeMagnitudeSTD              
+TimeBodyGyroscopeJerkMagnitudeMean              
+TimeBodyGyroscopeJerkMagnitudeSTD             
+FrequencyBodyAccelerationMean-X              
+FrequencyBodyAccelerationMean-Y             
+FrequencyBodyAccelerationMean-Z              
+FrequencyBodyAccelerationSTD-X             
+FrequencyBodyAccelerationSTD-Y              
+FrequencyBodyAccelerationSTD-Z              
+FrequencyBodyAccelerationMeanFrequency-X              
+FrequencyBodyAccelerationMeanFrequency-Y              
+FrequencyBodyAccelerationMeanFrequency-Z              
+FrequencyBodyAccelerationJerkMean-X              
+FrequencyBodyAccelerationJerkMean-Y              
+FrequencyBodyAccelerationJerkMean-Z             
+ FrequencyBodyAccelerationJerkSTD-X              
+FrequencyBodyAccelerationJerkSTD-Y              
+FrequencyBodyAccelerationJerkSTD-Z              
+FrequencyBodyAccelerationJerkMeanFrequency-X              
+FrequencyBodyAccelerationJerkMeanFrequency-Y              
+FrequencyBodyAccelerationJerkMeanFrequency-Z              
+FrequencyBodyGyroscopeMean-X              
+FrequencyBodyGyroscopeMean-Y              
+FrequencyBodyGyroscopeMean-Z              
+FrequencyBodyGyroscopeSTD-X              
+FrequencyBodyGyroscopeSTD-Y              
+FrequencyBodyGyroscopeSTD-Z              
+FrequencyBodyGyroscopeMeanFrequency-X              
+FrequencyBodyGyroscopeMeanFrequency-Y              
+FrequencyBodyGyroscopeMeanFrequency-Z              
+FrequencyBodyAccelerationMagnitudeMean              
+FrequencyBodyAccelerationMagnitudeSTD              
+FrequencyBodyAccelerationMagnitudeMeanFrequency              
+FrequencyBodyAccelerationJerkMagnitudeMean             
+FrequencyBodyAccelerationJerkMagnitudeSTD              
+FrequencyBodyAccelerationJerkMagnitudeMeanFrequency              
+FrequencyBodyGyroscopeMagnitudeMean              
+FrequencyBodyGyroscopeMagnitudeSTD              
+FrequencyBodyGyroscopeMagnitudeMeanFrequency              
+FrequencyBodyGyroscopeJerkMagnitudeMean             
+FrequencyBodyGyroscopeJerkMagnitudeSTD              
+FrequencyBodyGyroscopeJerkMagnitudeMeanFrequency
+
+### Steps peformed on data (Not necessarily in this order).
 
 1. Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement.
