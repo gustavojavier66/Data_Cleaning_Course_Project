@@ -1,43 +1,52 @@
+#1.	Merges the training and the test sets to create one data set.
+
 library(data.table)
 
+#Load File
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(fileUrl, destfile = "Dataset.zip")
-unzip("Dataset.zip")
+unzip('Dataset.zip')     
 
-testData <- read.table("./UCI HAR Dataset/test/X_test.txt",header=FALSE)
-testDataY <- read.table("./UCI HAR Dataset/test/y_test.txt",header=FALSE)
-testDataSubject <- read.table("./UCI HAR Dataset/test/subject_test.txt",header=FALSE)
+#Load the activity and subject data
+subjectTest <- read.table("./UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
+subjectTrain <- read.table("./UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
+yTest <- read.table("./UCI HAR Dataset/test/y_test.txt", col.names = "activity")
+yTrain <- read.table("./UCI HAR Dataset/train/y_train.txt", col.names = "activity")
 
-trainData <- read.table("./UCI HAR Dataset/train/X_train.txt",header=FALSE)
-trainDataY <- read.table("./UCI HAR Dataset/train/y_train.txt",header=FALSE)
-trainDataSubject <- read.table("./UCI HAR Dataset/train/subject_train.txt",header=FALSE)
+#Load activity labels file
+activityLabels <- read.table("./UCI HAR Dataset/activity_labels.txt", col.names = c("activityNumber", "activity"))
 
-# 3. Uses descriptive activity names to name the activities in the data set
-activities <- read.table("./UCI HAR Dataset/activity_labels.txt",header=FALSE,colClasses="character")
-testDataY$V1 <- factor(testDataY$V1,levels=activities$V1,labels=activities$V2)
-trainDataY$V1 <- factor(trainDataY$V1,levels=activities$V1,labels=activities$V2)
+#Load features file
+features <- read.table("./UCI HAR Dataset/features.txt", check.names = FALSE)
 
-# 4. Appropriately labels the data set with descriptive variable names.
-features <- read.table("./UCI HAR Dataset/features.txt",header=FALSE,colClasses="character")
-colnames(testData)<-features$V2
-colnames(trainData)<-features$V2
-colnames(testDataY)<-c("Activity")
-colnames(trainDataY)<-c("Activity")
-colnames(testDataSubject)<-c("Subject")
-colnames(trainDataSubject)<-c("Subject")
+#Load X_train file
+xTrain <- read.table("./UCI HAR Dataset/train/X_train.txt", colClasses = rep("numeric", 561),col.names = features[[2]], check.names = FALSE)
 
-# 1. Merges the training and the test sets to create one data set.
-testData<-cbind(testData,testDataY)
-testData<-cbind(testData,testDataSubject)
-trainData<-cbind(trainData,trainDataY)
-trainData<-cbind(trainData,trainDataSubject)
-finalData<-rbind(testData,trainData)
+#Load X_Test file
+test <- read.table("./UCI HAR Dataset/test/X_test.txt", colClasses = rep("numeric", 561), col.names = features[[2]], check.names = FALSE)
 
-# 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-finalDataMean<-sapply(finalData,mean,na.rm=TRUE)
-finalDataSD<-sapply(finalData,sd,na.rm=TRUE)
+#Place Data in table with table headings
+prelimData <- cbind(rbind(subjectTrain, subjectTest), rbind(yTrain, yTest)) 
 
-# 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-DT <- data.table(finalData)
-tidy<-DT[,lapply(.SD,mean),by="Activity,Subject"]
-write.table(tidy,file="tidy.csv",sep=",",row.names = FALSE)
+#Place labels from activity labels into activity column
+prelimData$activity <- activityLabels[match(prelimData$activity, activityLabels[[1]]), 2]
+
+#Combine Subject and Activity columns with the train and test data excluding  the mean() and std() variables
+finalData <- cbind(prelimData, rbind(train, test)[,meanAndStd <- grep("mean()|std()", features[[2]])])
+
+#Ambiguous Descriptions
+ambiguousTitles <- c( "Acc", "BodyBody",  "^f", "freq",  "^t", "-mean\\(\\)", "-meanFreq\\(\\)",  "Gyro", "Mag", "-std\\(\\)")
+
+#Clearer Descriptions titles
+clearTitles <- c("Acceleration", "Body", "Frequency", "Frequency", "Time", "Mean", "MeanFrequency", "Gyroscope", "Magnitude", "STD")
+  			   
+#Loop through and replace ambiguousTitles Descriptions with Clearer Descriptions
+for(i in seq_along(clearTitles)){
+    names(finalData) <- sub(ambiguousTitles[i], clearTitles[i], names(finalData))
+}
+
+#Data set with the average of each variable for each activity and each subject
+finalMeanData <- aggregate(finalData[, 3:length(finalData)],  list(activity = finalData$activity, subject = finalData$subject), mean)
+
+#Write Data to output file
+write.table(finalMeanData,file="tidy.csv",sep=",",row.names = FALSE)
