@@ -29,4 +29,4 @@ y_test.txt: 			A vector of 2947 integers, denoting the ID of the activity relate
 -----------------------------------------------------------------------------------------------------------------
 
 1. Download the run_analysis.R into the directory that is your current working directory for RStudio.
-2. Run the Source function using the run_analysis.R file as the paramater  Source(run_analysis.R) dirctories and tinydata.csv will be created.
+2. Run the Source function using the run_analysis.R file as the paramater  Source(run_analysis.R) dirctories and tiny.csv will be created.
